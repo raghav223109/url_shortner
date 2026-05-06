@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+
+<div class="card shadow-sm p-4">
+
+    <h2 class="mb-4">Shorten Your URL</h2>
+
+    <form method="post">
+
+        <div class="mb-3">
+            <label class="form-label">Enter URL</label>
+
+            <input type="url"
+                   name="url"
+                   class="form-control"
+                   placeholder="https://example.com"
+                   required>
+        </div>
+
+        <button type="submit" class="btn btn-dark">
+            Generate Short URL
+        </button>
+
+    </form>
+
+</div>
+
+
+<div class="card shadow-sm mt-4 p-4">
+
+    <h3>Your URLs</h3>
+
+    {% if all_urls %}
+
+        <div class="row">
+
+            {% for url in all_urls %}
+
+            <div class="col-md-6 mt-4">
+
+                <div class="card shadow-sm h-100">
+
+                    <div class="card-body">
+
+                        <h5 class="card-title">
+                            Short URL
+                        </h5>
+
+                        <a href="{{ request.host_url }}{{ url.short_url }}"
+                           target="_blank">
+
+                            {{ request.host_url }}{{ url.short_url }}
+
+                        </a>
+
+                        <hr>
+
+                        <p>
+                            <strong>Original URL:</strong>
+                        </p>
+
+                        <p class="text-break">
+                            {{ url.original_url }}
+                        </p>
+
+                        <hr>
+
+                        <h6>QR Code</h6>
+
+                        <img src="/{{ url.qr_code }}"
+                             class="img-fluid border rounded"
+                             width="200">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% else %}
+
+        <p class="text-muted mt-3">
+            No URLs created yet.
+        </p>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}
