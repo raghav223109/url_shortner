@@ -2,7 +2,7 @@
 
 A secure and responsive URL Shortener web application built using Flask, SQLAlchemy, SQLite, and Bootstrap. The application allows users to register, log in, generate shortened URLs, and automatically create QR codes for each shortened link.
 
----
+--
 
 ## 🚀 Features
 
